@@ -18,7 +18,7 @@ export class Confirm extends Component {
         this.props.prevStep();
       }
     render() {
-// Aynı şekilde values değişkenlerimizi props olarak tanımlayıp burada kullanabiliyoruz.
+// Aynı şekilde values state değişkenlerimizi props olarak tanımlayıp burada kullanabiliyoruz.
         const {values: {firstName, lastName, idendityNumber, homeValue, creditValue, totalDue}} = this.props
         return (
             <MuiThemeProvider>

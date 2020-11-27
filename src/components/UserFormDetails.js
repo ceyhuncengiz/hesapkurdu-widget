@@ -21,7 +21,7 @@ export class UserFormDetails extends Component {
         return (
             <MuiThemeProvider>
              <React.Fragment>
-              <AppBar title='Konut kredisi' />
+              <AppBar title='Kişisel Bilgiler' />
               <TextField
                hintText='Adınızı Girin'
                floatingLabelText='Ad'
@@ -41,11 +41,11 @@ export class UserFormDetails extends Component {
               <br/>
               <TextField
                type='number'
-               hintText='T.C Kimlik Numaranızı Girin'
-               floatingLabelText='T.C Kimlik No'
-               onChange={handleChange('idendityNumber')}
-               defaultValue={values.idendityNumber}
-               errorText={values.idendityNumberError}
+               hintText='T.C. Kimlik Numaranızı Girin'
+               floatingLabelText='T.C. Kimlik No'
+               onChange={handleChange('identityNumber')}
+               defaultValue={values.identityNumber}
+               errorText={values.identityNumberError}
               />
               <br/>
               <RaisedButton 

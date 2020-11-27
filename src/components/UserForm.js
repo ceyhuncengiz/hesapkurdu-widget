@@ -13,8 +13,8 @@ export class UserForm extends Component {
         firstNameError: '',
         lastName: '',
         lastNameError: '',
-        idendityNumber: '',
-        idendityNumberError: '',
+        identityNumber: '',
+        identityNumberError: '',
         homeValue: '',
         homeValueError: '',
         creditValue: '',
@@ -24,14 +24,14 @@ export class UserForm extends Component {
     }
     
 
-    // Form kontrol fonksiyoları
+    // Form kontrol fonksiyoları, hataları alert olarak göstermek yerine alanın altında göstermek daha iyi olur diye düşündüm.
 
     validate = () => {
     let isError = false;
     const errors = {
         firstNameError: '',
         lastNameError: '',
-        idendityNumberError: '',
+        identityNumberError: '',
         homeValueError: '',
         creditValueError: '',
         totalDueError: ''
@@ -63,13 +63,13 @@ export class UserForm extends Component {
             isError = true;
             errors.lastNameError = 'Soyad alanı boş bırakılamaz!';
         }
-        if(this.state.idendityNumber.length < 11) {
+        if(this.state.identityNumber.length < 11) {
             isError = true;
-            errors.idendityNumberError = 'Kimlik numarası 11 haneden küçük olmamalı!';
+            errors.identityNumberError = 'Kimlik numarası 11 haneden küçük olamaz!';
         }
-        if(this.state.idendityNumber.length > 11) {
+        if(this.state.identityNumber.length > 11) {
             isError = true;
-            errors.idendityNumberError = 'Kimlik numarası 11 haneden büyük olmamalı!';
+            errors.identityNumberError = 'Kimlik numarası 11 haneden büyük olamaz!';
         }
         if(this.state.homeValue.length > 7) {
             isError = true;
@@ -83,8 +83,21 @@ export class UserForm extends Component {
             isError = true;
             errors.homeValueError = 'Verilecek kredi evinizin değerinden yüksek olamaz!'
         }
-
+        // Çalışmayan fonksiyonlar burada, belki benim hatamı bulup çalışır hale getirebilirsiniz
+        // Burada evin değerini tam olarak 1000 tl olarak değil de 4 hane olarak düşünmüştüm. ...length > 7 çalışıyor fakat bu çalışmadı
+            // if(this.state.homeValue.length < 4) {
+            //     isError = true;
+            //     errors.homeValueError = 'Evinizin değeri en az 1000 TL olabilir!'
+            // }
+        // Örneğin bunun benzeri fonksiyon kişisel bilgiler ekranında çalışırken, kredi bilgileri sayfasında çalışmadı.
+            // if(!this.state.homeValue) {
+            //     isError = true;
+            //     errors.lastNameError = 'Evin değeri boş bırakılamaz!';
+            // }
         
+
+    // Birden fazla alanda hata var ise buradaki gibi hataları ve state propslarını tekrar dağıttımız için 1 ve daha fazla alanda hatayı görebiliyoruz
+
         this.setState({
             ...this.state,
             ...errors
@@ -100,11 +113,11 @@ export class UserForm extends Component {
         const err = this.validate();
         if (!err) {
             this.setState({
-        // Formda hatalı yazım olduktan sonra doğru şekilde yazılsa bile hata gitmiyordu. Bunun için step harici olan stateleri de ekledim.
+    // Formda hatalı yazım olduktan sonra doğru şekilde yazılsa bile hata gitmiyordu. Bunun için step harici olan stateleri de ekledim.
                 step: step + 1,
                 firstNameError: '',
                 lastNameError: '',
-                idendityNumberError: '',
+                identityNumberError: '',
                 homeValueError: '',
                 creditValueError: '',
                 totalDueError: ''
@@ -127,8 +140,8 @@ export class UserForm extends Component {
             firstNameError: '',
             lastName: '',
             lastNameError: '',
-            idendityNumber: '',
-            idendityNumberError: '',
+            identityNumber: '',
+            identityNumberError: '',
             homeValue: '',
             homeValueError: '',
             creditValue: '',
@@ -143,11 +156,11 @@ export class UserForm extends Component {
     }
     render() {
         const { step } = this.state;
-        const { firstName, firstNameError, lastName, lastNameError, idendityNumber, idendityNumberError, homeValue, homeValueError, creditValue, creditValueError, totalDue} = this.state;
-        const values = { firstName, firstNameError, lastName, lastNameError, idendityNumber, idendityNumberError, homeValue, homeValueError, creditValue, creditValueError, totalDue}
+        const { firstName, firstNameError, lastName, lastNameError, identityNumber, identityNumberError, homeValue, homeValueError, creditValue, creditValueError, totalDue} = this.state;
+        const values = { firstName, firstNameError, lastName, lastNameError, identityNumber, identityNumberError, homeValue, homeValueError, creditValue, creditValueError, totalDue}
         
         switch(step) {
-    // Kullanıcının Ad, Soyad, TC Numarası girdiği bölüm
+    // Kullanıcının Ad, Soyad, T.C. Numarası girdiği bölüm
             case 1: 
              return (
                  <UserFormDetails 
@@ -191,4 +204,4 @@ export class UserForm extends Component {
     }
 }
 
-export default UserForm
+export default UserForm;
