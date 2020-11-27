@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/hesapkurdu-widget/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/hesapkurdu-widget/static/js/main.60a469a6.chunk.js",
-    "main.js.map": "/hesapkurdu-widget/static/js/main.60a469a6.chunk.js.map",
+    "main.js": "/hesapkurdu-widget/static/js/main.0713fe55.chunk.js",
+    "main.js.map": "/hesapkurdu-widget/static/js/main.0713fe55.chunk.js.map",
     "runtime-main.js": "/hesapkurdu-widget/static/js/runtime-main.328bab38.js",
     "runtime-main.js.map": "/hesapkurdu-widget/static/js/runtime-main.328bab38.js.map",
     "static/js/2.e683fcd8.chunk.js": "/hesapkurdu-widget/static/js/2.e683fcd8.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.328bab38.js",
     "static/js/2.e683fcd8.chunk.js",
     "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.60a469a6.chunk.js"
+    "static/js/main.0713fe55.chunk.js"
   ]
 }
