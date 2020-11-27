@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 
 
-export class UserCreditDetails extends Component {
+export class Confirm extends Component {
 // Bu methodlar, props olarak alınan nextStep ve prevStep fonksiyonunu kullanmamızı sağlayacak.
     continue = e => {
       e.preventDefault();
@@ -77,4 +77,4 @@ const styles = {
     }
 }
 
-export default UserCreditDetails;
+export default Confirm;

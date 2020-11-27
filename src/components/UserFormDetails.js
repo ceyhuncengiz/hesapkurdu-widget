@@ -5,40 +5,47 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
+
 export class UserFormDetails extends Component {
 // Bu method, props olarak alınan nextStep fonksiyonunu kullanmamızı sağlayacak.
     continue = e => {
       e.preventDefault();
       this.props.nextStep();
     }
+
+
+
     render() {
 // Aynı şekilde values değişkenlerimizi props olarak tanımlayıp burada kullanabiliyoruz.
         const {values, handleChange} = this.props
         return (
             <MuiThemeProvider>
              <React.Fragment>
-              <AppBar title='Hesapkurdu | Konut kredisi' />
+              <AppBar title='Konut kredisi' />
               <TextField
-               required
-               hintText='Lütfen Adınızı Girin'
+               hintText='Adınızı Girin'
                floatingLabelText='Ad'
                onChange={handleChange('firstName')}
                defaultValue={values.firstName}
+               errorText={values.firstNameError}      
               />
               <br/>
               <TextField
-               hintText='Lütfen Soyadınızı Girin'
+               type='text'
+               hintText='Soyadınızı Girin'
                floatingLabelText='Soyad'
                onChange={handleChange('lastName')}
                defaultValue={values.lastName}
+               errorText={values.lastNameError}
               />
               <br/>
               <TextField
                type='number'
-               hintText='Lütfen T.C Kimlik Numaranızı Girin'
+               hintText='T.C Kimlik Numaranızı Girin'
                floatingLabelText='T.C Kimlik No'
                onChange={handleChange('idendityNumber')}
                defaultValue={values.idendityNumber}
+               errorText={values.idendityNumberError}
               />
               <br/>
               <RaisedButton 

@@ -6,23 +6,110 @@ import Success from './Success';
 
 export class UserForm extends Component {
 
-    // Kullanıcı bilgilerini burada tutmayı tercih ettim, bu şekilde ileri-geri yaptığında bilgiler kaybolmuyor
+    // Kullanıcı bilgilerini burada tutmayı tercih ettim, bu şekilde ileri-geri yapıldığında bilgiler kaybolmuyor
     state = {
         step: 1,
         firstName: '',
+        firstNameError: '',
         lastName: '',
+        lastNameError: '',
         idendityNumber: '',
+        idendityNumberError: '',
         homeValue: '',
+        homeValueError: '',
         creditValue: '',
-        totalDue: ''
+        creditValueError: '',
+        totalDue: '',
+        totalDueError: ''
+    }
+    
+
+    // Form kontrol fonksiyoları
+
+    validate = () => {
+    let isError = false;
+    const errors = {
+        firstNameError: '',
+        lastNameError: '',
+        idendityNumberError: '',
+        homeValueError: '',
+        creditValueError: '',
+        totalDueError: ''
+    };
+
+    // Evin değeri, kredi değeri ve vade alanı boş olduğunda hata verme fonksiyonlarını kaldırmak zorunda kaldım.
+    // Sayfaları donduruyor ve stabil çalışmıyordu. 
+        if(this.state.firstName.length < 2) {
+            isError = true;
+            errors.firstNameError = 'Ad alanında en az 2 harf bulunmalı!';
+        }
+        if(this.state.firstName.length > 10) {
+            isError = true;
+            errors.firstNameError = 'Ad alanında en fazla 10 harf bulunmalı!';
+        }
+        if(!this.state.firstName) {
+            isError = true;
+            errors.firstNameError = 'Ad alanı boş bırakılamaz!';
+        }
+        if(this.state.lastName.length < 2) {
+            isError = true;
+            errors.lastNameError = 'Soyad alanında en az 2 harf bulunmalı!';
+        }
+        if(this.state.lastName.length > 10) {
+            isError = true;
+            errors.lastNameError = 'Soyad alanında en fazla 10 harf bulunmalı!';
+        }
+        if(!this.state.lastName) {
+            isError = true;
+            errors.lastNameError = 'Soyad alanı boş bırakılamaz!';
+        }
+        if(this.state.idendityNumber.length < 11) {
+            isError = true;
+            errors.idendityNumberError = 'Kimlik numarası 11 haneden küçük olmamalı!';
+        }
+        if(this.state.idendityNumber.length > 11) {
+            isError = true;
+            errors.idendityNumberError = 'Kimlik numarası 11 haneden büyük olmamalı!';
+        }
+        if(this.state.homeValue.length > 7) {
+            isError = true;
+            errors.homeValueError = 'Evinizin değeri en fazla 1.000.000 TL olabilir!'
+        }
+        if(this.state.creditValue.length > 7) {
+            isError = true;
+            errors.homeValueError = 'Kredi değeri en fazla 1.000.000 TL olabilir!'
+        }
+        if(this.state.homeValue.length < this.state.creditValue.length) {
+            isError = true;
+            errors.homeValueError = 'Verilecek kredi evinizin değerinden yüksek olamaz!'
+        }
+
+        
+        this.setState({
+            ...this.state,
+            ...errors
+        })
+        
+        return isError;
     }
 
-    // Kullanıcının bir sonraki sayfaya gitmesini sağlayan fonksiyon
+    // Kullanıcının form kontrolünü yaptığımız ve bir sonraki sayfaya gitmesini sağlayan fonksiyon
     nextStep = () => {
         const { step } = this.state;
-        this.setState({
-            step: step + 1
-        });
+        // Formu burada kontrol ediyoruz
+        const err = this.validate();
+        if (!err) {
+            this.setState({
+        // Formda hatalı yazım olduktan sonra doğru şekilde yazılsa bile hata gitmiyordu. Bunun için step harici olan stateleri de ekledim.
+                step: step + 1,
+                firstNameError: '',
+                lastNameError: '',
+                idendityNumberError: '',
+                homeValueError: '',
+                creditValueError: '',
+                totalDueError: ''
+            });
+        } 
     }
     // Kullanıcının bir önceki sayfaya gitmesini sağlayan fonksiyon
     prevStep = () => {
@@ -37,11 +124,16 @@ export class UserForm extends Component {
         this.setState({
             step: 1,
             firstName: '',
+            firstNameError: '',
             lastName: '',
+            lastNameError: '',
             idendityNumber: '',
+            idendityNumberError: '',
             homeValue: '',
+            homeValueError: '',
             creditValue: '',
-            totalDue: ''
+            creditValueError: '',
+            totalDue: '',
         })
     }
 
@@ -51,8 +143,8 @@ export class UserForm extends Component {
     }
     render() {
         const { step } = this.state;
-        const { firstName, lastName, idendityNumber, homeValue, creditValue, totalDue} = this.state;
-        const values = { firstName, lastName, idendityNumber, homeValue, creditValue, totalDue}
+        const { firstName, firstNameError, lastName, lastNameError, idendityNumber, idendityNumberError, homeValue, homeValueError, creditValue, creditValueError, totalDue} = this.state;
+        const values = { firstName, firstNameError, lastName, lastNameError, idendityNumber, idendityNumberError, homeValue, homeValueError, creditValue, creditValueError, totalDue}
         
         switch(step) {
     // Kullanıcının Ad, Soyad, TC Numarası girdiği bölüm
@@ -85,10 +177,8 @@ export class UserForm extends Component {
                 )
     // Kullanıcının kredi onayını verip, geri bildirim aldığı bölüm
             case 4:
-             return <Success 
-                      resetStep={this.resetStep}
-                    />
-        
+             return <Success resetStep={this.resetStep} />
+                
           default: 
             return (
                 <UserFormDetails 
